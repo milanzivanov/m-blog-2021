@@ -8,19 +8,19 @@ function Home() {
         {
             title: "My new blog site",
             body: "lorem ipsum text...",
-            outhor: "Milan",
+            author: "Marko",
             id: 1
         },
         {
             title: "Welcome react",
             body: "lorem ipsum text...",
-            outhor: "Milanko",
+            author: "Milanko",
             id: 2
         },
         {
             title: "my new blog site",
             body: "lorem ipsum text...",
-            outhor: "Milosav",
+            author: "Milosav",
             id: 3
         },
     ]);
@@ -28,6 +28,7 @@ function Home() {
     return (
         <div className="home">
             <BlogList blogs={blogs} title="Props with destructuring"></BlogList>
+            <BlogList blogs={blogs.filter((blog) => blog.author === "Marko")} title="Markov blog"></BlogList>
         </div>
     );
 }
