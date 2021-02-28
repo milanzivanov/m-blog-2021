@@ -27,7 +27,7 @@ function Home() {
 
     return (
         <div className="home">
-            <BlogList blogs={blogs} title="Test me props"></BlogList>
+            <BlogList blogs={blogs} title="Props with destructuring"></BlogList>
         </div>
     );
 }
