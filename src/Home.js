@@ -25,10 +25,19 @@ function Home() {
         },
     ]);
 
+    // Full React Tutorial #13 - Functions as Props
+    const handleDelete = (id) => {
+        const newBlogs = blogs.filter(blog => blog.id !== id);
+        setBlogs(newBlogs);
+    }
+
     return (
         <div className="home">
-            <BlogList blogs={blogs} title="Props with destructuring"></BlogList>
-            <BlogList blogs={blogs.filter((blog) => blog.author === "Marko")} title="Markov blog"></BlogList>
+            <BlogList 
+                blogs={blogs} 
+                title="Marko's blog" 
+                handleDelete={handleDelete}>
+            </BlogList>
         </div>
     );
 }
