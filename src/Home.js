@@ -25,6 +25,8 @@ function Home() {
         },
     ]);
 
+    const [name, setName] = useState('Milan');
+
     // Full React Tutorial #13 - Functions as Props
     const handleDelete = (id) => {
         const newBlogs = blogs.filter(blog => blog.id !== id);
@@ -34,8 +36,8 @@ function Home() {
     // Full React Tutorial #14 - useEffect Hook (the basics)
     useEffect(() => {
         console.log('Use effect ran');
-        console.log(blogs);
-    });
+        console.log(name);
+    }, [name]);
 
     return (
         <div className="home">
@@ -44,6 +46,8 @@ function Home() {
                 title="Marko's blog" 
                 handleDelete={handleDelete}>
             </BlogList>
+            <button onClick={() => setName("Miki")}>Change name</button>
+            <p>{ name }</p>
         </div>
     );
 }
