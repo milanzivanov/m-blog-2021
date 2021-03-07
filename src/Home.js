@@ -2,52 +2,37 @@ import { useState, useEffect } from 'react';
 import BlogList from './BlogList';
 
 
-function Home() {
+function Home(props) {
 
-    const [blogs, setBlogs] = useState([
-        {
-            title: "My new blog site",
-            body: "lorem ipsum text...",
-            author: "Marko",
-            id: 1
-        },
-        {
-            title: "Welcome react",
-            body: "lorem ipsum text...",
-            author: "Milanko",
-            id: 2
-        },
-        {
-            title: "my new blog site",
-            body: "lorem ipsum text...",
-            author: "Milosav",
-            id: 3
-        },
-    ]);
+    const [blogs, setBlogs] = useState(null);
 
-    const [name, setName] = useState('Milan');
-
-    // Full React Tutorial #13 - Functions as Props
-    const handleDelete = (id) => {
-        const newBlogs = blogs.filter(blog => blog.id !== id);
-        setBlogs(newBlogs);
-    }
-
-    // Full React Tutorial #14 - useEffect Hook (the basics)
     useEffect(() => {
-        console.log('Use effect ran');
-        console.log(name);
-    }, [name]);
+
+        // one way
+        // const fetchData = async () => {
+        //     const response = await fetch("http://localhost:8000/blogs");
+        //     const data = await response.json();
+        //     console.log(data);
+        //     setBlogs(data);
+        // };
+        // fetchData();
+
+        // second way 
+        fetch("http://localhost:8000/blogs")
+            .then( res => res.json())
+            .then(data => {
+                console.log(data);
+                setBlogs(data);
+            });
+
+    }, []);
 
     return (
         <div className="home">
-            <BlogList 
+            {blogs && <BlogList 
                 blogs={blogs} 
-                title="Marko's blog" 
-                handleDelete={handleDelete}>
-            </BlogList>
-            <button onClick={() => setName("Miki")}>Change name</button>
-            <p>{ name }</p>
+                title="Marko's blog">
+            </BlogList> }
         </div>
     );
 }
