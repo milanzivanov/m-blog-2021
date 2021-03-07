@@ -8,22 +8,23 @@ function Home(props) {
 
     useEffect(() => {
 
-        // one way
-        // const fetchData = async () => {
-        //     const response = await fetch("http://localhost:8000/blogs");
-        //     const data = await response.json();
-        //     console.log(data);
-        //     setBlogs(data);
-        // };
-        // fetchData();
+        // my way with my json file
+        const fetchData = async () => {
+            const response = await fetch("https://next.json-generator.com/api/json/get/4ydcDgPG9");
+            const data = await response.json();
+            let dataResponse = data.blogs;
+            console.log(dataResponse);
+            setBlogs(dataResponse);
+        };
+        fetchData();
 
         // second way 
-        fetch("http://localhost:8000/blogs")
-            .then( res => res.json())
-            .then(data => {
-                console.log(data);
-                setBlogs(data);
-            });
+        // fetch("http://localhost:8000/blogs")
+        //     .then( res => res.json())
+        //     .then(data => {
+        //         console.log(data);
+        //         setBlogs(data);
+        //     });
 
     }, []);
 
