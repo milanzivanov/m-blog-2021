@@ -1,6 +1,7 @@
 import Navbar from './Navbar';
 import Home from './Home';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import About from './About';
 
 // one way
 // function App() {
@@ -24,15 +25,17 @@ const App = () => {
         <Navbar></Navbar>
         <div className="content">
           <Switch>
-              <Route path="/">
+              <Route exact path="/">
                   <Home></Home>
+              </Route>
+              <Route path="/about">
+                  <About></About>
               </Route>
           </Switch>
         </div>
       </div>
     </Router>
   );
-
 }
 
 
