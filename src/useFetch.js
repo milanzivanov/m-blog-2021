@@ -9,55 +9,78 @@ const useFetch = (url) => {
     useEffect(() => {
         
         // my way with my json file
-        const fetchData = async (url) => {
+        // const abortCont = new AbortController();
+        // const fetchData = async (url) => {
 
-            try {
-                const response = await fetch(url);  
-                const data = await response.json();
-                let dataResponse = data.blogs;
+        //     try {
+        //         const response = await fetch(url, { signal: abourtCont.signal });  
+        //         const data = await response.json();
+        //         let dataResponse = data.blogs;
 
-                setData(dataResponse);
+        //         setData(dataResponse);
                 
-                // to hide loading msg
-                setIsPending(false);
+        //         // to hide loading msg
+        //         setIsPending(false);
                 
-                // error
-                setError(null);
+        //         // error
+        //         setError(null);
                 
-            } catch(err) {
-                setIsPending(false);
-                setError(err.message);
-                // catches errors both in fetch and response.json
-                // console.log(err);
-            }
+        //     } catch(err) {
+
+        //         if(err.name === "AbortError") {
+        //             console.log("fetch aborted")
+        //         } else {
+        //             setIsPending(false);
+        //             setError(err.message);
+        //             // catches errors both in fetch and response.json
+        //             // console.log(err);
+        //         }
+                   // abort the fetch
+        //         // return () => console.log("cleanup");
+        //         return () => abortCont.abort();
+        //     }
+
             
-        };
+        // };
         
-        fetchData(url);
+        // fetchData(url);
 
         // second way tutorial way
         // json-server --watch data/db.json --port 8000
-        // fetch(url)
-        //     .then( response => {
-        //         if(!response.ok) {
-        //             throw Error("Could not fetch the data for that resource");
-        //         }
-        //         return response.json()
-        //     })
-        //     .then(dataResponse => {
-        //         setData(dataResponse);
+        const abortCont = new AbortController();
 
-        //         // to hide loading msg
-        //         setIsPending(false);
+        setTimeout(() => {
 
-        //         // error
-        //         setError(null);
-        //     })
-        //     .catch(err => {
-        //         // auto catches network / connection error
-        //         setIsPending(false);
-        //         setError(err.message);
-        //     });
+            fetch(url, { signal: abortCont.signal })
+                .then( response => {
+                    if(!response.ok) {
+                        throw Error("Could not fetch the data for that resource");
+                    }
+                    return response.json();
+                })
+                .then(dataResponse => {
+                    // to hide loading msg
+                    setIsPending(false);
+
+                    setData(dataResponse);
+    
+                    // error
+                    setError(null);
+                })
+                .catch(err => {
+                    if (err.name === 'AbortError') {
+                        console.log('fetch aborted')
+                    } else {
+                    // auto catches network / connection error
+                        setIsPending(false);
+                        setError(err.message);
+                    }
+                })
+
+        }, 1000);
+
+        // abort the fetch
+        return () => abortCont.abort();
 
     }, [url]);
 
