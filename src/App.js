@@ -2,6 +2,7 @@ import Navbar from './Navbar';
 import Home from './Home';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import About from './About';
+import BlogDetails from './BlogDetails';
 
 // one way
 // function App() {
@@ -30,6 +31,9 @@ const App = () => {
               </Route>
               <Route path="/about">
                   <About></About>
+              </Route>
+              <Route path="/blogs/:id">
+                  <BlogDetails></BlogDetails>
               </Route>
           </Switch>
         </div>
