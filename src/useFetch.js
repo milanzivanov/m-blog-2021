@@ -14,7 +14,9 @@ const useFetch = (url) => {
         const fetchData = async (url) => {
 
             try {
-                const response = await fetch(url, { signal: abortCont.signal });
+                const response = await fetch(url, { 
+                    signal: abortCont.signal
+                });
                 const data = await response.json();
 
                 let dataResponse = data.blogs;

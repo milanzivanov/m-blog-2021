@@ -7,9 +7,9 @@ function Home() {
     const {data: blogs, isPending, error} = useFetch(
         "https://next.json-generator.com/api/json/get/4ydcDgPG9"
     );
-    // const {data, isPending, error} = useFetch("https://next.json-generator.com/api/json/get/4ydcDgPG9");
     // tutorial url
     // const {data: blogs, isPending, error} = useFetch("http://localhost:8000/blogs");
+    // console.log(blogs);
 
     return (
         <div className="home">
