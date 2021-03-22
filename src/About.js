@@ -6,11 +6,21 @@ const [title, setTitle] = useState('');
 const [body, setBody] = useState('');
 const [author, setAuthor] = useState('marko');
 
+const handleSubmit = (e) => {
+    e.preventDefault();
+    const blog = {
+        title,
+        body,
+        author
+    }
+
+    console.log(blog);
+}
 
     return ( 
         <div className="about">
             <h2>Add new blog</h2>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>Blog title:</label>
                 <input 
                     type="text"
@@ -38,9 +48,10 @@ const [author, setAuthor] = useState('marko');
                 <button>
                     Add Blog
                 </button>
-                <p>{ title }</p>
+                {/* for testing */}
+                {/* <p>{ title }</p>
                 <p>{ body }</p>
-                <p>{ author }</p>
+                <p>{ author }</p> */}
             </form>
         </div>
     );
